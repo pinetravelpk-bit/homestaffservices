@@ -1,0 +1,23 @@
+[Unit]
+Description=Home Staff Services Next.js site (homestaffservices.com)
+After=network.target
+
+[Service]
+Type=simple
+User=homestaff
+Group=homestaff
+WorkingDirectory=/var/www/homestaffservices
+Environment=NODE_ENV=production
+Environment=PORT=3107
+Environment=SITE_URL=https://homestaffservices.com
+Environment=DATA_DIR=/var/lib/homestaffservices
+Environment=NEXT_TELEMETRY_DISABLED=1
+ExecStart=/usr/bin/node /var/www/homestaffservices/node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3107
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=full
+ReadWritePaths=/var/lib/homestaffservices /var/www/homestaffservices/.next
+
+[Install]
+WantedBy=multi-user.target

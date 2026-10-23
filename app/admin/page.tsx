@@ -1,0 +1,2 @@
+import {redirect} from 'next/navigation';import {session} from '@/lib/auth';import {getContent,enquiries} from '@/lib/db';import Dashboard from '@/components/admin/Dashboard';
+export const dynamic='force-dynamic';export default async function Admin(){const user=await session();if(!user)redirect('/admin/login');return <Dashboard initialContent={getContent()} initialEnquiries={enquiries()} email={user.email}/>}

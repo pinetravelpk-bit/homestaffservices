@@ -1,0 +1,14 @@
+services:
+  website:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      NODE_ENV: production
+      SITE_URL: https://homestaffservices.com
+      DATA_DIR: /app/data
+    volumes:
+      - homestaff-data:/app/data
+volumes:
+  homestaff-data:
