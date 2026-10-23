@@ -18,3 +18,33 @@
 @media(max-width:900px) and (min-width:701px){.slider-story h1{font-size:41px;min-height:3.15em}.slider-visual{min-height:350px}.slider-image-stage{border-radius:70px 12px 45px 12px}.slider-float-label{padding:12px;gap:8px;bottom:15px}.slider-float-label strong{font-size:17px}.slider-float-label small{font-size:7px}.slider-controls{gap:10px}.slide-number{font-size:20px}.slide-arrows{gap:4px}.slide-arrows>button{width:27px;height:27px}}
 @media(max-width:700px){.hero:has(.hero-slider){padding-top:18px}.slider-grid{gap:16px;min-height:0;padding-bottom:22px}.slider-copy{padding:5px 0 0}.slider-story h1{font-size:clamp(41px,10.6vw,61px);min-height:3.12em;margin-bottom:15px}.slider-story .hero-description{min-height:3em;font-size:14px;margin-bottom:20px;max-width:380px}.slider-eyebrow{font-size:8px!important;letter-spacing:.16em;gap:9px;margin-bottom:16px!important}.eyebrow-line{width:21px}.slider-story .hero-buttons .button{font-size:10px;padding:14px 15px}.slider-story .hero-buttons{gap:10px;min-height:45px}.slider-controls{margin-top:21px;max-width:none;gap:20px}.slider-copy .hero-chips{margin-top:19px;gap:18px;font-size:9px}.slider-visual{min-height:0;width:100%;padding:5px 5px 18px 0;margin-top:0}.slider-image-stage{aspect-ratio:1.35;max-height:400px;border-radius:65px 12px 40px 12px}.slider-float-label{bottom:3px;left:10px;padding:11px 15px;gap:10px;border-radius:9px}.slider-float-label strong{font-size:18px}.slider-float-label small{font-size:7px}.slider-float-label>span{width:30px;height:30px}.slider-side-note{right:-6px;top:16%;font-size:7px;letter-spacing:.17em}.spark-one{font-size:30px;top:-15px;right:18px}.spark-two{left:-7px;font-size:20px}.slider-orbit{inset:4% 0 6% -2%}.hero:has(.hero-slider) .quick-wrap{transform:translateY(10px)}.hero-slider{touch-action:pan-y}.slider-visual .hero-shot>.photo{border-radius:0}}
 @media(prefers-reduced-motion:reduce){.hero-slider *,.hero-slider *:before,.hero-slider *:after{animation:none!important;transition:none!important}.hero-shot.is-active .photo>svg,.hero-shot.is-active .photo>img{transform:none!important}.slide-light-sweep,.slider-spark,.hero-ambient{display:none}.slide-dots>button.active>span{transform:scaleX(1)}}
+
+/* Prominent phone number */
+.utility-phone{display:inline-flex;align-items:center;gap:6px;color:var(--gold-light);font-weight:bold;font-size:12px;letter-spacing:.02em}
+.utility-phone:hover{color:#fff}
+.nav-phone{display:flex;align-items:center;gap:10px;color:var(--green);white-space:nowrap}
+.nav-phone-icon{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#fff;box-shadow:0 0 0 0 #ad884866;animation:phonePulse 2.4s infinite}
+.nav-phone-text{display:flex;flex-direction:column;line-height:1.15}
+.nav-phone-text small{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.nav-phone-text strong{font-family:var(--sans);font-size:18px;color:var(--green)}
+.nav-phone:hover strong{color:var(--gold)}
+@keyframes phonePulse{0%{box-shadow:0 0 0 0 #ad884870}70%{box-shadow:0 0 0 12px #ad884800}100%{box-shadow:0 0 0 0 #ad884800}}
+.hero-call{display:inline-flex;align-items:center;gap:10px;margin-top:18px;color:var(--green);font-size:15px}
+.hero-call span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:var(--gold-light)}
+.hero-call strong{font-size:20px;font-family:var(--sans);letter-spacing:.02em}
+.hero-call:hover strong{color:var(--gold)}
+.footer-phone{font-size:20px;font-weight:bold;color:var(--gold-light)!important}
+.call-card{margin:22px 0;padding:22px 24px;border-radius:18px;background:var(--green);color:var(--ivory);box-shadow:0 12px 30px #103d3222}
+.call-card small{display:block;font-size:11px;letter-spacing:.14em;color:var(--gold-light)}
+.call-card-number{display:block;margin:6px 0 12px;font-family:var(--sans);font-size:clamp(28px,4vw,38px);font-weight:bold;color:#fff;letter-spacing:.02em}
+.call-card-actions{display:flex;gap:10px;flex-wrap:wrap}
+.call-card .button{background:var(--gold);border-color:var(--gold);color:#fff}
+.call-card .button.wa{background:#27b956;border-color:#27b956}
+.mobile-dock.has-call{grid-template-columns:1fr 1fr 1fr}
+.mobile-dock .dock-call{font-weight:bold;color:var(--green)}
+.mobile-dock .dock-wa{color:#1d9a46;font-weight:bold;border-left:1px solid #d0d6c9}
+@media(max-width:1150px){.nav-phone-text small{display:none}.nav-phone-text strong{font-size:15px}}
+@media(max-width:900px){.nav-phone-text{display:none}.nav-phone-icon{width:38px;height:38px}}
+.utility-phone{white-space:nowrap}
+@media(max-width:700px){.nav-phone{order:2}.utility .container>span{display:none}.utility .container>div{font-size:9px}.utility-phone{font-size:12px}.hero-call strong{font-size:18px}body:has(.mobile-dock.has-call) .whatsapp{display:none}}
+@media(prefers-reduced-motion:reduce){.nav-phone-icon{animation:none}}

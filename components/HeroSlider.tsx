@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, ArrowRight, ChevronLeft, ChevronRight, Pause, Play, House, Heart, UserRound, Sparkles } from 'lucide-react';
+import { Phone, ArrowUpRight, ArrowRight, ChevronLeft, ChevronRight, Pause, Play, House, Heart, UserRound, Sparkles } from 'lucide-react';
 import Artwork from './Artwork';
 import type { Service, Settings } from '@/lib/types';
 
@@ -64,7 +64,7 @@ export default function HeroSlider({ settings, services }: { settings: Settings;
           <p className="eyebrow slider-eyebrow"><span className="eyebrow-line"/>{slide.eyebrow}</p>
           <h1><span className="hero-title">{slide.title}</span><br/><em>{slide.accent}</em></h1>
           <p className="hero-description">{slide.description}</p>
-          <div className="hero-buttons"><a className="button" href={slide.destination}>{slide.action} <ArrowUpRight size={17}/></a><a className="button outline" href="#services">All Services <ArrowRight size={15}/></a></div>
+          <div className="hero-buttons"><a className="button" href={slide.destination}>{slide.action} <ArrowUpRight size={17}/></a><a className="button outline" href="#services">All Services <ArrowRight size={15}/></a></div>{settings.phone && <a className="hero-call" href={'tel:'+settings.phone.replace(/[^+0-9]/g,'')}><span><Phone size={16}/></span>Call now: <strong>{settings.phone}</strong></a>}
         </div>
         <div className="hero-chips"><span><House/>Home help</span><span><Heart/>Family care</span><span><UserRound/>Personal service</span></div>
         <div className="slider-controls">
