@@ -127,3 +127,7 @@ Hosted on the Inventive Clicks VPS (72.62.193.221) behind nginx, run by systemd 
 - Create the admin login: `cd /var/www/homestaffservices && sudo -u homestaff env DATA_DIR=/var/lib/homestaffservices npm run setup-admin`
 - Deploy new changes after pushing to GitHub: `bash /var/www/homestaffservices/deploy/update.sh`
 - Logs: `journalctl -u homestaffservices -f`
+
+## Photo credits
+
+Photos in `public/images/stock/` are from [Pexels](https://www.pexels.com) under the free Pexels licence (commercial use allowed, no attribution required). Pexels photo IDs: hero 9462324, housekeeper 9462317, cook 9346161, driver 36377051, nanny 12159154, elderly-care 7345474, guard 30516935, family 36799071, office 8112161.

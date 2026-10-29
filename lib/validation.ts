@@ -1,6 +1,6 @@
 import {z} from 'zod';
 const text=z.string().trim();
-const image=text.max(300).refine(v=>/^art:(hero|maid|cook|driver|nanny|care|gardener|family|office|house|key|map)$/.test(v)||/^\/media\/[a-f0-9-]+\.(jpg|png|webp)$/.test(v),'Use a built-in image or an uploaded image');
+const image=text.max(300).refine(v=>/^art:(hero|maid|cook|driver|nanny|care|gardener|family|office|house|key|map)$/.test(v)||/^\/media\/[a-f0-9-]+\.(jpg|png|webp)$/.test(v)||(v.startsWith('/images/stock/')&&v.endsWith('.webp')&&/^[a-z-]+$/.test(v.slice(14,-5))),'Use a built-in image or an uploaded image');
 export const enquirySchema=z.object({kind:z.enum(['enquiry','application']).default('enquiry'),name:text.min(2).max(100),phone:text.min(7).max(30).regex(/^[+0-9 ()-]+$/),city:text.min(2).max(100),service:text.min(2).max(100),preference:text.max(60).default('To discuss'),message:text.max(2000).default(''),website:text.max(0).optional()});
 const slug=text.regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).max(100);
 const id=text.min(1).max(100);
