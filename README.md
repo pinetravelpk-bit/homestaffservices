@@ -131,3 +131,12 @@ Hosted on the Inventive Clicks VPS (72.62.193.221) behind nginx, run by systemd 
 ## Photo credits
 
 Photos in `public/images/stock/` are from [Pexels](https://www.pexels.com) under the free Pexels licence (commercial use allowed, no attribution required). Pexels photo IDs: hero 3770107, housekeeper 7641552, cook 36870973, driver 36377051, nanny 12159154, elderly-care 7551653, guard 30516935, family 36799071, office 8112161.
+
+## Blog
+
+- Public pages: `/blog` (all articles) and `/blog/<slug>` (one article). The 3 newest articles also show on the homepage, and published articles are added to the sitemap automatically.
+- Write articles in **Admin → Blog**: title, URL slug (filled in from the title), short summary, cover image, article text with a formatting toolbar and live preview, SEO title/description with a Google preview, author and publish date.
+- **Save draft** keeps an article hidden; **Publish** puts it live; **Unpublish** hides it again.
+- Article text uses simple Markdown (`## Heading`, `**bold**`, `- list`, `[link](/contact)`, images). Raw HTML is shown as text, never run.
+- Posts are stored in the `posts` table of the SQLite database in `DATA_DIR`, and are included in the admin JSON backup.
+- Three starter articles are added once on first run; edit or delete them freely.

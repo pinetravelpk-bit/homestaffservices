@@ -3,6 +3,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
 import path from 'node:path';
 import { seed } from './seed';
+import { starterPosts } from './blogSeed';
 import type { Content, Enquiry } from './types';
 let instance:DatabaseSync;
 export function db(){
@@ -15,8 +16,17 @@ export function db(){
  CREATE TABLE IF NOT EXISTS sessions(token TEXT PRIMARY KEY,email TEXT NOT NULL,expires INTEGER NOT NULL);
  CREATE TABLE IF NOT EXISTS limits(key TEXT PRIMARY KEY,count INTEGER NOT NULL,reset INTEGER NOT NULL);
  CREATE TABLE IF NOT EXISTS enquiries(id TEXT PRIMARY KEY,kind TEXT NOT NULL,name TEXT NOT NULL,phone TEXT NOT NULL,city TEXT NOT NULL,service TEXT NOT NULL,preference TEXT NOT NULL,message TEXT NOT NULL,status TEXT NOT NULL DEFAULT 'New',notes TEXT NOT NULL DEFAULT '',createdAt TEXT NOT NULL);
+ CREATE TABLE IF NOT EXISTS posts(id TEXT PRIMARY KEY,slug TEXT NOT NULL UNIQUE,title TEXT NOT NULL,excerpt TEXT NOT NULL DEFAULT '',body TEXT NOT NULL,cover TEXT NOT NULL DEFAULT '',status TEXT NOT NULL DEFAULT 'draft',seoTitle TEXT NOT NULL DEFAULT '',seoDescription TEXT NOT NULL DEFAULT '',author TEXT NOT NULL DEFAULT '',publishedAt TEXT NOT NULL DEFAULT '',createdAt TEXT NOT NULL,updatedAt TEXT NOT NULL);
+ CREATE INDEX IF NOT EXISTS posts_status ON posts(status,publishedAt);
+ CREATE TABLE IF NOT EXISTS meta(key TEXT PRIMARY KEY,value TEXT NOT NULL);
  `);
  instance.prepare('INSERT OR IGNORE INTO content(id,json) VALUES(1,?)').run(JSON.stringify({...seed,settings:{...seed.settings,siteUrl:process.env.SITE_URL||seed.settings.siteUrl}}));
+ // Starter blog posts are added once. Deleting them later does not bring them back.
+ if(!instance.prepare("SELECT 1 FROM meta WHERE key='posts_seeded'").get()){
+  const insert=instance.prepare('INSERT OR IGNORE INTO posts(id,slug,title,excerpt,body,cover,status,seoTitle,seoDescription,author,publishedAt,createdAt,updatedAt) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)');
+  for(const p of starterPosts)insert.run(p.id,p.slug,p.title,p.excerpt,p.body,p.cover,p.status,p.seoTitle,p.seoDescription,p.author,p.publishedAt,p.createdAt,p.updatedAt);
+  instance.prepare("INSERT INTO meta(key,value) VALUES('posts_seeded','1')").run();
+ }
  return instance;
 }
 export function getContent():Content {return JSON.parse((db().prepare('SELECT json FROM content WHERE id=1').get() as {json:string}).json);}

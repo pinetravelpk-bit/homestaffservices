@@ -10,3 +10,16 @@ export const contentSchema=z.object({
  areas:z.array(z.object({id,slug,title:text.min(2).max(100),description:text.min(20).max(6000),neighborhoods:z.array(text.min(1).max(100)).max(50),active:z.boolean()})).max(100),
  faqs:z.array(z.object({id,question:text.min(5).max(200),answer:text.min(10).max(2000)})).max(40)
 }).superRefine((c,ctx)=>{for(const key of ['services','areas'] as const){for(const field of ['id','slug'] as const){const vals=c[key].map(x=>x[field]);if(new Set(vals).size!==vals.length)ctx.addIssue({code:'custom',path:[key],message:'IDs and slugs must be unique'});}}});
+export const postSchema=z.object({
+ title:text.min(3,'Add a title of at least 3 characters').max(140),
+ slug:text.regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/,'Use lowercase letters, numbers and hyphens in the URL slug').max(100),
+ excerpt:text.max(300).default(''),
+ body:text.min(20,'Write at least a few sentences').max(60000),
+ cover:z.union([z.literal(''),image]).default(''),
+ status:z.enum(['draft','published']),
+ seoTitle:text.max(100).default(''),
+ seoDescription:text.max(300).default(''),
+ author:text.max(80).default(''),
+ publishedAt:z.union([z.literal(''),z.iso.datetime()]).default('')
+});
+export type PostInput=z.infer<typeof postSchema>;
