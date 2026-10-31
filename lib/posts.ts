@@ -1,6 +1,6 @@
 import 'server-only';
 import { randomUUID } from 'node:crypto';
-import { db } from './db';
+import { db, plainRows } from './db';
 import type { Post } from './types';
 import type { PostInput } from './validation';
 
@@ -8,12 +8,12 @@ const columns = 'id,slug,title,excerpt,body,cover,status,seoTitle,seoDescription
 
 /** Published posts, newest first. */
 export function publishedPosts(limit = 100): Post[] {
-  return db().prepare(`SELECT ${columns} FROM posts WHERE status='published' ORDER BY publishedAt DESC LIMIT ?`).all(limit) as unknown as Post[];
+  return plainRows<Post>(db().prepare(`SELECT ${columns} FROM posts WHERE status='published' ORDER BY publishedAt DESC LIMIT ?`).all(limit));
 }
 
 /** Every post including drafts, for the admin panel. */
 export function allPosts(): Post[] {
-  return db().prepare(`SELECT ${columns} FROM posts ORDER BY CASE status WHEN 'draft' THEN 0 ELSE 1 END, COALESCE(NULLIF(publishedAt,''),updatedAt) DESC`).all() as unknown as Post[];
+  return plainRows<Post>(db().prepare(`SELECT ${columns} FROM posts ORDER BY CASE status WHEN 'draft' THEN 0 ELSE 1 END, COALESCE(NULLIF(publishedAt,''),updatedAt) DESC`).all());
 }
 
 export function publishedPost(slug: string): Post | undefined {

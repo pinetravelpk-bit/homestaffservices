@@ -41,6 +41,7 @@ try{
  const file=new FormData();const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=','base64');file.set('file',new Blob([png],{type:'image/png'}),'test.png');const upload=await api('/api/admin/media','POST',file,true);ok(upload.status===201,'Authenticated image upload');uploaded=(await upload.json()).url;ok((await api(uploaded)).status===200,'Uploaded image publicly served');
  const badFile=new FormData();badFile.set('file',new Blob(['<svg onload="alert(1)"></svg>'],{type:'image/svg+xml'}),'bad.svg');ok((await api('/api/admin/media','POST',badFile,true)).status===400,'SVG upload rejected');
 
+ ok((await api('/admin','GET',undefined,true)).status===200,'Admin dashboard loads while enquiries exist');
  // Blog
  const slugBase='integration-test-'+randomUUID().slice(0,8);
  const draftPost={title:'Integration test article',slug:slugBase,excerpt:'Temporary automated test article.',body:'## Test heading'+String.fromCharCode(10,10)+'A temporary article <script>alert(1)</script> with [a link](/contact) and [bad](javascript:alert(1)).',cover:'/images/stock/cook.webp',status:'draft',seoTitle:'',seoDescription:'',author:'Test',publishedAt:''};

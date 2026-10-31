@@ -31,7 +31,10 @@ export function db(){
 }
 export function getContent():Content {return JSON.parse((db().prepare('SELECT json FROM content WHERE id=1').get() as {json:string}).json);}
 export function saveContent(content:Content){db().prepare('UPDATE content SET json=? WHERE id=1').run(JSON.stringify(content));}
-export function enquiries():Enquiry[]{return db().prepare('SELECT * FROM enquiries ORDER BY createdAt DESC').all() as unknown as Enquiry[];}
+// node:sqlite returns rows without a normal prototype, which React refuses to pass to client components.
+// Spread each row into a plain object so the admin dashboard can receive it.
+export const plainRows=<T,>(rows:unknown[]):T[]=>rows.map(r=>({...(r as object)}) as T);
+export function enquiries():Enquiry[]{return plainRows<Enquiry>(db().prepare('SELECT * FROM enquiries ORDER BY createdAt DESC').all());}
 export function limited(key:string,max:number,windowMs:number){
  const now=Date.now(); const d=db();
  d.prepare('INSERT INTO limits(key,count,reset) VALUES(?,1,?) ON CONFLICT(key) DO UPDATE SET count=CASE WHEN reset<? THEN 1 ELSE count+1 END,reset=CASE WHEN reset<? THEN excluded.reset ELSE reset END').run(key,now+windowMs,now,now);
