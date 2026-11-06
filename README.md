@@ -130,7 +130,7 @@ Hosted on the Inventive Clicks VPS (72.62.193.221) behind nginx, run by systemd 
 
 ## Photo credits
 
-Photos in `public/images/stock/` are from [Pexels](https://www.pexels.com) under the free Pexels licence (commercial use allowed, no attribution required). Pexels photo IDs: hero 3770107, housekeeper 7641552, cook 36870973, driver 36377051, nanny 12159154, elderly-care 7551653, guard 30516935, family 36799071, office 8112161.
+Photos in `public/images/stock/` and `public/images/cities/` are from [Pexels](https://www.pexels.com) under the free Pexels licence (commercial use allowed, no attribution required). Pexels photo IDs: hero 3770107, housekeeper 7641552, cook 36870973, driver 36377051, nanny 12159154, elderly-care 7551653, guard 30516935, family 36799071, office 8112161. City photos: Islamabad 30665958, Rawalpindi 8583526, Lahore 12912453, Karachi 40079278, Multan 5303063.
 
 ## Blog
 

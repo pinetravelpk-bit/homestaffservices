@@ -155,3 +155,21 @@
 .blog-start svg{color:var(--gold)}
 .blog-start h3{margin:6px 0 0}
 @media(max-width:700px){.blog-option-row{grid-template-columns:1fr}.blog-body-head{flex-direction:column;align-items:stretch}.blog-actions{justify-content:stretch}.blog-actions .button{flex:1;justify-content:center}}
+
+/* City photo cards */
+.city-heading{margin-bottom:26px}
+.city-heading .text-link{color:var(--gold);font-weight:bold;text-decoration:underline;text-underline-offset:3px}
+.city-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.city-card{position:relative;display:block;aspect-ratio:3/4;border-radius:18px;overflow:hidden;color:#fff;background:var(--green);box-shadow:0 10px 26px #2c232118;isolation:isolate}
+.city-card .photo{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto!important;transition:transform .7s}
+.city-card:hover .photo{transform:scale(1.07)}
+.city-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0000 40%,#1f1817d9);z-index:1}
+.city-card-blank{position:absolute;inset:0;background:linear-gradient(135deg,var(--green),var(--gold))}
+.city-card-label{position:absolute;left:16px;right:40px;bottom:16px;z-index:2;display:flex;flex-direction:column;gap:3px}
+.city-card-label strong{font-family:var(--serif);font-size:24px;font-weight:500;letter-spacing:-.02em}
+.city-card-label small{font-size:11px;opacity:.85}
+.city-card-arrow{position:absolute;right:14px;bottom:18px;z-index:2;opacity:.85;transition:transform .3s}
+.city-card:hover .city-card-arrow{transform:translate(3px,-3px)}
+.city-page-eyebrow{margin-top:28px}
+@media(max-width:1000px){.city-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.city-card:last-child:nth-child(odd){grid-column:span 2;aspect-ratio:16/9}.city-grid{grid-template-columns:repeat(2,1fr);gap:12px}.city-card{aspect-ratio:4/5}.city-card-label strong{font-size:20px}.city-heading{flex-direction:column;align-items:flex-start}}

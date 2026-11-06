@@ -18,7 +18,7 @@ let cookie='',leadIds=[],testPostIds=[],originalContent,uploaded,passed=0;
 const ok=(condition,message)=>{assert.ok(condition,message);passed++;console.log('PASS '+message)};
 async function api(url,method='GET',body,auth=false,origin=base){const res=await fetch(base+url,{method,headers:{...(body&&!(body instanceof FormData)?{'Content-Type':'application/json'}:{}),...(method!=='GET'?{Origin:origin}:{}),...(auth?{Cookie:cookie}:{})},body:body instanceof FormData?body:body?JSON.stringify(body):undefined,redirect:'manual'});return res;}
 try{
- for(const path of ['/','/about','/contact','/careers','/services/cooks-chefs','/areas/islamabad','/privacy','/terms','/sitemap.xml','/robots.txt','/admin/preview','/blog','/blog/how-to-hire-reliable-domestic-staff-in-pakistan']){const res=await api(path);ok(res.status===200,'Public route '+path);}
+ for(const path of ['/','/about','/contact','/careers','/services/cooks-chefs','/areas/islamabad','/areas/multan','/images/cities/multan.webp','/privacy','/terms','/sitemap.xml','/robots.txt','/admin/preview','/blog','/blog/how-to-hire-reliable-domestic-staff-in-pakistan']){const res=await api(path);ok(res.status===200,'Public route '+path);}
  ok((await api('/services/missing-service')).status===404,'Unknown service returns 404');ok((await api('/blog/missing-article')).status===404,'Unknown article returns 404');
  ok((await api('/admin')).status===307,'Admin redirects without session');
  for(const path of ['/api/admin/content','/api/admin/enquiries','/api/admin/media','/api/admin/backup','/api/admin/posts'])ok((await api(path)).status===401,'Protected '+path);
